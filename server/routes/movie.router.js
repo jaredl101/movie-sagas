@@ -56,18 +56,3 @@ router.put('/:id', (req, res) => {
 
 module.exports = router;
 
-
-// route to get specific movie
-// router.get("/:id", (req, res) => {
-//   let id = req.params.id
-//   const queryText = `SELECT * FROM movies WHERE id = $1 ORDER BY title ASC`;
-//   pool
-//     .query(queryText, [id])
-//     .then((result) => {
-//       res.send(result.rows);
-//     })
-//     .catch((error) => {
-//       console.log(`Error on query ${error}`);
-//       res.sendStatus(500);
-//     });
-// });

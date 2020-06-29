@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { withRouter } from "react-router";
 
 import { connect } from 'react-redux';
+import Grid from "@material-ui/core/Grid";
 
 
 class MovieItem extends Component {
@@ -18,12 +18,12 @@ class MovieItem extends Component {
   }
   render() {
     return (
-      <div>
+        <Grid item xs={6} sm={3}>
         <p>{this.props.movieItem.title}</p>
         <div className="MovieItem">
           <img src={this.props.movieItem.poster} alt={this.props.movieItem.title} onClick={this.toDetails}/>
         </div>
-      </div>
+      </Grid>
     )
   }
 }
