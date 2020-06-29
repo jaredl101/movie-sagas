@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import Header from '../Header/Header'
 import './App.css';
+
+// Component Imports:
+import Header from '../Header/Header'
+
+
 
 class App extends Component {
   // Renders the entire app on the DOM
