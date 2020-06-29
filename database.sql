@@ -1,14 +1,14 @@
 CREATE TABLE "movies" (
-  "id" SERIAL PRIMARY KEY,
-  "title" VARCHAR(120) NOT NULL,
-  "poster"  VARCHAR(120) NOT NULL,
+  "id" SERIAL PRIMARY KEY,
+  "title" VARCHAR(120) NOT NULL,
+  "poster"  VARCHAR(120) NOT NULL,
   "description" TEXT NOT NULL
 );
 
 -- movies can have multiple genres
 CREATE TABLE "genres" (
-  "id" SERIAL PRIMARY KEY,
-  "name" VARCHAR(80) NOT NULL
+  "id" SERIAL PRIMARY KEY,
+  "name" VARCHAR(80) NOT NULL
 );
 
 
@@ -55,3 +55,79 @@ VALUES
 ('Science Fiction'),
 ('Space-Opera'),
 ('Superhero');
+
+select * from genres;
+
+CREATE TABLE "movies_genres"(
+	"movies_genre_id" SERIAL PRIMARY KEY,
+	"movie_id" INT NOT NULL REFERENCES movies,
+	"genre_id" INT NOT NULL REFERENCES genres
+);
+ 
+
+insert into "movies_genres" (movie_id, genre_id) values (1, 2);
+insert into "movies_genres" (movie_id, genre_id) values (2, 2);
+insert into "movies_genres" (movie_id, genre_id) values (1, 1);
+insert into "movies_genres" (movie_id, genre_id) values (2, 10);
+insert into "movies_genres" (movie_id, genre_id) values (2, 8);
+insert into "movies_genres" (movie_id, genre_id) values (2, 5);
+
+select title, name as genre_name from movies_genres
+JOIN movies_genres on movies_genres.movie_id = movies.id
+JOIN genres on movies_genres.genre_id = genres.id;
+
+--COULD ALSO DO:
+
+select movies.title,  array_agg(name) from movies 
+JOIN movies_genres on movies_genres.movie_id = movies.id
+JOIN genres on movies_genres.genre_id = genres.id
+GROUP by movies.title;
+
+SELECT * FROM movies WHERE id = 1 ORDER BY title ASC;
+
+SELECT movies.title, array_agg(genres.name) AS genres
+FROM movies
+JOIN movies_genres ON movies_genres.movie_id=movies.id 
+JOIN genres ON movies_genres.genre_id=genres.id WHERE movies.id = 2
+GROUP by movies.title;
+
+UPDATE "movies" 
+SET "description"='New Description', "title" ='New Title'
+WHERE "id" = 1;
+
+insert into "movies_genres" (movie_id, genre_id) values (3, 1);
+insert into "movies_genres" (movie_id, genre_id) values (3, 11);
+insert into "movies_genres" (movie_id, genre_id) values (3, 13);
+insert into "movies_genres" (movie_id, genre_id) values (4, 1);
+insert into "movies_genres" (movie_id, genre_id) values (4, 2);
+insert into "movies_genres" (movie_id, genre_id) values (4, 4);
+insert into "movies_genres" (movie_id, genre_id) values (5, 6);
+insert into "movies_genres" (movie_id, genre_id) values (5, 1);
+insert into "movies_genres" (movie_id, genre_id) values (5, 2);
+insert into "movies_genres" (movie_id, genre_id) values (6, 1);
+insert into "movies_genres" (movie_id, genre_id) values (6, 8);
+insert into "movies_genres" (movie_id, genre_id) values (7, 1);
+insert into "movies_genres" (movie_id, genre_id) values (7, 7);
+insert into "movies_genres" (movie_id, genre_id) values (8, 1);
+insert into "movies_genres" (movie_id, genre_id) values (8, 6);
+insert into "movies_genres" (movie_id, genre_id) values (8, 8);
+
+insert into "movies_genres" (movie_id, genre_id) values (9, 1);
+insert into "movies_genres" (movie_id, genre_id) values (9, 2);
+insert into "movies_genres" (movie_id, genre_id) values (9, 4);
+
+insert into "movies_genres" (movie_id, genre_id) values (10, 1);
+insert into "movies_genres" (movie_id, genre_id) values (10, 8);
+insert into "movies_genres" (movie_id, genre_id) values (10, 11);
+insert into "movies_genres" (movie_id, genre_id) values (11, 1);
+insert into "movies_genres" (movie_id, genre_id) values (11, 6);
+insert into "movies_genres" (movie_id, genre_id) values (11, 11);
+insert into "movies_genres" (movie_id, genre_id) values (12, 3);
+insert into "movies_genres" (movie_id, genre_id) values (12, 6);
+
+insert into "movies_genres" (movie_id, genre_id) values (13, 6);
+insert into "movies_genres" (movie_id, genre_id) values (13, 10);
+
+insert into "movies_genres" (movie_id, genre_id) values (14, 1);
+insert into "movies_genres" (movie_id, genre_id) values (14, 2);
+insert into "movies_genres" (movie_id, genre_id) values (14, 4);
