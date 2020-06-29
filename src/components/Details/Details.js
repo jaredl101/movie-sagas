@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
 
@@ -22,11 +21,13 @@ class Details extends Component {
     // }
 
     //JSON.stringify(this.props.currentMovie[0])
+    const { movies, currentMovie, detail, } = this.props;
 
     return (
       <>
+
         {/* (condition) ? [return for true] : [return for false]; */}
-        {(this.props.movies === [] || this.props.currentMovie === [] || this.props.detail === []) ?
+        {(movies === [] || this.props.currentMovie === [] || this.props.detail === []) ?
           <>
             {this.props.history.push('/')}
           </>
