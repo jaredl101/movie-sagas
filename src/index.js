@@ -9,10 +9,30 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
+import { takeEvery, put, call } from 'redux-saga/effects';
+
+
+// Axios Impot:
+import Axios from 'axios';
 
 // Create the rootSaga generator function
 function* rootSaga() {
+  yield takeEvery('FETCH_MOVIES', fetchMovies);
+}
 
+// function to get movies
+function* fetchMovies(action) {
+  // wrap it all in try/catch
+  // yield axios
+  // dispatch the result with put!
+  try {
+    const response = yield Axios.get('/api/movie');
+    // const result = yield call(axios.get, '/fruit');
+    yield put({ type: 'SET_MOVIES', payload: response.data });
+  } catch (error) {
+    // console.log('Error fetching fruits', error);
+    alert('Unable to get basket from server');
+  }
 }
 
 // Create sagaMiddleware
