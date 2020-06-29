@@ -15,7 +15,15 @@ class Details extends Component {
 
   render() {
     let id = this.props.currentId -1;
-    console.log(`Current movie genres: ${this.props.currentMovie[0].genres}`)
+    console.log(`Current movie genres: ${this.props.currentMovie}`)
+    console.log(JSON.stringify(this.props.currentMovie[0]));
+    if(this.props.currentMovie.length > 0){
+      console.log(this.props.currentMovie[0].genres);
+      
+    }
+    
+    //JSON.stringify(this.props.currentMovie[0])
+
     return (
       <div>
         < br/>
@@ -28,7 +36,12 @@ class Details extends Component {
     <p>{this.props.currentMovie.genres}</p>,
             <button onClick={this.back}>Back</button>,
             <button onClick={this.edit}>Edit</button>,
-            <p>{this.props.movies[id].description}</p>
+            <p>{this.props.movies[id].description}</p>,
+            
+              <p>{this.props.currentMovie[0].genres.map((movie) => {
+                return <p>{movie}</p>;
+              })}
+              </p>
           
           ]
             
