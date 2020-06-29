@@ -18,6 +18,7 @@ import Axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchMovies);
+  yield takeEvery('FETCH_CURRENT_MOVIE', fetchCurrentMovie);
 }
 
 // function to get movies
@@ -29,6 +30,21 @@ function* fetchMovies(action) {
     const response = yield Axios.get('/api/movie');
     // const result = yield call(axios.get, '/fruit');
     yield put({ type: 'SET_MOVIES', payload: response.data });
+  } catch (error) {
+    // console.log('Error fetching fruits', error);
+    alert('Unable to get basket from server');
+  }
+}
+
+// function to get current movie
+function* fetchCurrentMovie(action) {
+  // wrap it all in try/catch
+  // yield axios
+  // dispatch the result with put!
+  try {
+    const response = yield Axios.get(`/api/movie/${action.payload}`);
+    // const result = yield call(axios.get, '/fruit');
+    yield put({ type: 'SET_CURRENT_MOVIE', payload: response.data });
   } catch (error) {
     // console.log('Error fetching fruits', error);
     alert('Unable to get basket from server');
@@ -58,11 +74,22 @@ const genres = (state = [], action) => {
     }
 }
 
+// Used to store the current movie that is selected 
+const currentMovie = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_CURRENT_MOVIE':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        currentMovie,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
