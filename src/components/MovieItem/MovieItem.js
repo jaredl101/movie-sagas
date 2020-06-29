@@ -11,10 +11,11 @@ class MovieItem extends Component {
     this.props.dispatch({ type: 'SET_CURRENT_ID', payload: this.props.movieItem.id });
     this.props.dispatch({ type: 'FETCH_DETAIL', payload: this.props.movieItem.id });
     this.props.dispatch({ type: 'FETCH_CURRENT_MOVIE', payload: this.props.movieItem.id });
-    this.props.history.push("/Details");
-
+    window.setTimeout(this.move, 250);
   }
-
+  move = () => {
+    this.props.history.push('/Details') // temp 
+  }
   render() {
     return (
       <div>
