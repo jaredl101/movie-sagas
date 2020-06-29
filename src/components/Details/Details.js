@@ -14,13 +14,14 @@ class Details extends Component {
   }
 
   render() {
-    let id = this.props.currentId -1;
-    console.log(`Current movie genres: ${this.props.currentMovie}`)
-    console.log(JSON.stringify(this.props.currentMovie[0]));
-    if(this.props.currentMovie.length > 0){
-      console.log(this.props.currentMovie[0].genres);
+    let id = this.props.currentId;
+    
+    //console.log(`Current movie genres: ${this.props.currentMovie}`)
+    //console.log(JSON.stringify(this.props.currentMovie[0]));
+    // if(this.props.detail.length > 0){
+    //   console.log(this.props.currentMovie[0].genres);
       
-    }
+    // }
     
     //JSON.stringify(this.props.currentMovie[0])
 
@@ -30,15 +31,15 @@ class Details extends Component {
         <div className="Details" >
           {/* (condition) ? [return for true] : [return for false]; */}
           
-    {(this.props.currentMovie.length > 0) ? [
-    < img src={this.props.movies[id].poster} alt={this.props.movies[id].title} /> , 
-    <p>{this.props.movies[id].title}</p>,
-    <p>{this.props.currentMovie.genres}</p>,
+    {(this.props.detail.length > 0 ) ? [
+    < img src={this.props.currentMovie[0].poster} alt={this.props.currentMovie[0].title} /> , 
+    <p>{this.props.currentMovie[0].title}</p>,
+    <p>{this.props.detail.genres}</p>,
             <button onClick={this.back}>Back</button>,
             <button onClick={this.edit}>Edit</button>,
             <p>{this.props.movies[id].description}</p>,
             
-              <p>{this.props.currentMovie[0].genres.map((movie) => {
+              <p>{this.props.detail[0].genres.map((movie) => {
                 return <p>{movie}</p>;
               })}
               </p>
@@ -55,10 +56,10 @@ class Details extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentMovie: state.currentMovie,
+    detail: state.detail,
     currentId: state.currentId,
     movies: state.movies,
-
+    currentMovie: state.currentMovie,
   };
 };
 export default withRouter(connect(mapStateToProps)(Details));

@@ -18,8 +18,9 @@ import Axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchMovies);
-  yield takeEvery('FETCH_CURRENT_MOVIE', fetchCurrentMovie);
+  yield takeEvery('FETCH_DETAIL', fetchDetail);
   yield takeEvery('UPDATE_MOVIE', updateMovie);
+  yield takeEvery('FETCH_CURRENT_MOVIE', fetchCurrentMovie);
 }
 
 // function to get movies
@@ -31,6 +32,21 @@ function* fetchMovies(action) {
     const response = yield Axios.get('/api/movie');
     // const result = yield call(axios.get, '/fruit');
     yield put({ type: 'SET_MOVIES', payload: response.data });
+  } catch (error) {
+    // console.log('Error fetching fruits', error);
+    alert('Unable to get basket from server');
+  }
+}
+
+// function to get current movie
+function* fetchDetail(action) {
+  // wrap it all in try/catch
+  // yield axios
+  // dispatch the result with put!
+  try {
+    const response = yield Axios.get(`/api/detail/${action.payload}`);
+    // const result = yield call(axios.get, '/fruit');
+    yield put({ type: 'SET_DETAIL', payload: response.data });
   } catch (error) {
     // console.log('Error fetching fruits', error);
     alert('Unable to get basket from server');
@@ -51,7 +67,6 @@ function* fetchCurrentMovie(action) {
     alert('Unable to get basket from server');
   }
 }
-
 function* updateMovie(action) {
   //DELETE THE FRUIT
   try {
@@ -86,7 +101,17 @@ const genres = (state = [], action) => {
     }
 }
 
-// Used to store the current movie that is selected 
+// Used to store the detail of the movie that is selected 
+const detail = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_DETAIL':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+// Used to store the current movie that is selected
 const currentMovie = (state = [], action) => {
   switch (action.type) {
     case 'SET_CURRENT_MOVIE':
@@ -111,8 +136,9 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        currentMovie,
+        detail,
         currentId,
+        currentMovie,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

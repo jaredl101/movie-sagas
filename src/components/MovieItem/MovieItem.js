@@ -9,6 +9,7 @@ class MovieItem extends Component {
 
   toDetails = () => {
     this.props.dispatch({ type: 'SET_CURRENT_ID', payload: this.props.movieItem.id });
+    this.props.dispatch({ type: 'FETCH_DETAIL', payload: this.props.movieItem.id });
     this.props.dispatch({ type: 'FETCH_CURRENT_MOVIE', payload: this.props.movieItem.id });
     this.props.history.push("/Details");
 

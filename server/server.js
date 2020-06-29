@@ -5,6 +5,7 @@ const port = process.env.PORT || 5000;
 
 // Route includes
 const movieRouter = require("./routes/movie.router");
+const detailRouter = require("./routes/detail.router");
 
 
 /** ---------- MIDDLEWARE ---------- **/
@@ -13,6 +14,7 @@ app.use(express.static('build'));
 
 /** ---------- ROUTES ---------- **/
 app.use("/api/movie", movieRouter);
+app.use("/api/detail", detailRouter);
 
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {

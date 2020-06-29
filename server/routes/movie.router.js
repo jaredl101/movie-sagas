@@ -18,14 +18,11 @@ router.get("/", (req, res) => {
     });
 });
 
-// route to get specific movie
+
+//route to get specific movie
 router.get("/:id", (req, res) => {
   let id = req.params.id
-  const queryText = `SELECT movies.title, array_agg(genres.name) AS genres
-  FROM movies
-  JOIN movies_genres ON movies_genres.movie_id=movies.id 
-  JOIN genres ON movies_genres.genre_id=genres.id WHERE movies.id = $1
-  GROUP by movies.title`;
+  const queryText = `SELECT * FROM movies WHERE id=$1`;
   pool
     .query(queryText, [id])
     .then((result) => {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
 import { connect } from 'react-redux';
+import { withRouter } from "react-router";
+
 
 
 
@@ -23,6 +25,10 @@ handleChangeFor = (propertyName, event) => {
     })
   }
 
+  cancel = (event) => {
+    this.props.history.push("/");
+  }
+
 
   submitInfo = (event) => {
 
@@ -33,6 +39,8 @@ handleChangeFor = (propertyName, event) => {
         newDescription: '',
       }
     });
+    this.props.history.push("/Details");
+
   };
 
 
@@ -57,6 +65,7 @@ handleChangeFor = (propertyName, event) => {
           />
           <br />
           <button type="submit">Save</button>
+          <button onClick={this.cancel}>Cancel</button>
           
         </form>
 
@@ -67,10 +76,10 @@ handleChangeFor = (propertyName, event) => {
 
 const mapStateToProps = (state) => {
   return {
-    currentMovie: state.currentMovie,
+    detail: state.detail,
     currentId: state.currentId,
     movies: state.movies,
 
   };
 };
-export default connect(mapStateToProps)(Edit);
+export default withRouter(connect(mapStateToProps)(Edit));
