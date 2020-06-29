@@ -37,10 +37,27 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.put('/:id', (req, res) => {
+  let movie = req.body; // treat with updated content
+  let id = req.params.id; // id of the treat to update
+  let title = movie.newTitle;
+  let description = movie.newDescription;
+  //console.log(`description is: ${description}`);
+  //console.log(treat);
+  let queryTextForUpdate = `UPDATE "movies" SET "description"=$2, "title" =$3 WHERE id = $1`
+  pool.query(queryTextForUpdate, [id, description, title])
+    .then((result) => {
+      console.log(result.command);
+      res.status(200).send(`Updating movie ${id} with , ${movie}`);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
 
 
 module.exports = router;
-
 
 
 // route to get specific movie

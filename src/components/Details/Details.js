@@ -10,7 +10,7 @@ class Details extends Component {
   }
 
   edit = () => {
-    this.props.history.push("/");
+    this.props.history.push("/Edit");
   }
 
   render() {

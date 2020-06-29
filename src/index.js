@@ -19,6 +19,7 @@ import Axios from 'axios';
 function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchMovies);
   yield takeEvery('FETCH_CURRENT_MOVIE', fetchCurrentMovie);
+  yield takeEvery('UPDATE_MOVIE', updateMovie);
 }
 
 // function to get movies
@@ -50,6 +51,17 @@ function* fetchCurrentMovie(action) {
     alert('Unable to get basket from server');
   }
 }
+
+function* updateMovie(action) {
+  //DELETE THE FRUIT
+  try {
+    yield Axios.put(`/api/movie/${action.payload}`);
+    //yield put({ type: 'SET_MOVIE' });
+  } catch (error) {
+    alert('Unable to update movie on server', error);
+  }
+}
+
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -83,6 +95,7 @@ const currentMovie = (state = [], action) => {
       return state;
   }
 }
+
 const currentId = (state = [], action) => {
   switch (action.type) {
     case 'SET_CURRENT_ID':
@@ -91,6 +104,7 @@ const currentId = (state = [], action) => {
       return state;
   }
 }
+
 
 // Create one store that all components can use
 const storeInstance = createStore(

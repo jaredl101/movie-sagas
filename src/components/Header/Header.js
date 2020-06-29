@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 class Header extends Component {
