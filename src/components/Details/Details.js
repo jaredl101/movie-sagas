@@ -9,19 +9,28 @@ class Details extends Component {
     this.props.history.push("/");
   }
 
+  edit = () => {
+    this.props.history.push("/");
+  }
+
   render() {
     return (
       <div>
+        < br/>
         <div className="Details" >
-          <img src={this.props.currentMovie.poster} alt={this.props.currentMovie.title} />
-          <br />
-          <p>{this.props.currentMovie.title}</p>
-          <br />
-          <p>{this.props.currentMovie.title}</p>
-          <button>Back</button>
-          <button>Edit</button>
+          {/* (condition) ? [return for true] : [return for false]; */}
+          
+    {(this.props.currentMovie.length > 0) ? [
+    < img src={this.props.currentMovie[0].poster} alt={this.props.currentMovie[0].title} /> , 
+    <p>{this.props.currentMovie[0].title}</p>,
+            <button onClick={this.back}>Back</button>,
+            <button onClick={this.edit}>Edit</button>,
+            <p>{this.props.currentMovie[0].description}</p>
+          
+          ]
+            
 
-
+    : <p>Nothing</p> }
         </div>
       </div>
     )
@@ -35,3 +44,10 @@ const mapStateToProps = (state) => {
   };
 };
 export default withRouter(connect(mapStateToProps)(Details));
+
+// <br />
+//   <p>{this.props.currentMovie[0].title}</p>
+//   <br />
+//   <p>{this.props.currentMovie[0].description}</p>
+//   <button onClick={this.back}>Back</button>
+//   <button>Edit</button>
