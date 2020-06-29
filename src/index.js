@@ -83,6 +83,14 @@ const currentMovie = (state = [], action) => {
       return state;
   }
 }
+const currentId = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_CURRENT_ID':
+      return action.payload;
+    default:
+      return state;
+  }
+}
 
 // Create one store that all components can use
 const storeInstance = createStore(
@@ -90,6 +98,7 @@ const storeInstance = createStore(
         movies,
         genres,
         currentMovie,
+        currentId,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
