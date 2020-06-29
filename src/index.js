@@ -33,8 +33,8 @@ function* fetchMovies(action) {
     // const result = yield call(axios.get, '/fruit');
     yield put({ type: 'SET_MOVIES', payload: response.data });
   } catch (error) {
-    // console.log('Error fetching fruits', error);
-    alert('Unable to get basket from server');
+    // console.log('Error fetching movies', error);
+    alert('unable to get movie from server');
   }
 }
 
@@ -49,7 +49,7 @@ function* fetchDetail(action) {
     yield put({ type: 'SET_DETAIL', payload: response.data });
   } catch (error) {
     // console.log('Error fetching fruits', error);
-    alert('Unable to get basket from server');
+    alert('Unable to get detail from server');
   }
 }
 
@@ -64,7 +64,7 @@ function* fetchCurrentMovie(action) {
     yield put({ type: 'SET_CURRENT_MOVIE', payload: response.data });
   } catch (error) {
     // console.log('Error fetching fruits', error);
-    alert('Unable to get basket from server');
+    alert('Unable to fetch current movie');
   }
 }
 function* updateMovie(action) {
