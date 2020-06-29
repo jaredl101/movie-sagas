@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink } from "react-router-dom";
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
 
@@ -57,10 +56,12 @@ handleChangeFor = (propertyName, event) => {
           />
           <br />
           <p>New movie description:</p>
-          <input
+          <textarea
             type="text"
             required
             placeholder="New Description"
+            rows="4"
+            cols="50"
             onChange={(event) => this.handleChangeFor('newDescription', event)}
           />
           <br />

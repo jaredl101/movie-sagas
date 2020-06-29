@@ -6,14 +6,13 @@ import { withRouter } from "react-router";
 
 class Details extends Component {
   componentDidMount = () => {
-    this.props.dispatch({ type: 'SET_CURRENT_ID', payload: this.props.currentId });
-    this.props.dispatch({ type: 'FETCH_DETAIL', payload: this.props.currentId });
-    this.props.dispatch({ type: 'FETCH_CURRENT_MOVIE', payload: this.props.currentId });
+    // this.props.dispatch({ type: 'SET_CURRENT_ID', payload: this.props.currentId });
+    // this.props.dispatch({ type: 'FETCH_DETAIL', payload: this.props.currentId });
+    // this.props.dispatch({ type: 'FETCH_CURRENT_MOVIE', payload: this.props.currentId });
   }
 
 
   render() {
-    let id = this.props.currentId;
 
     //console.log(`Current movie genres: ${this.props.currentMovie}`)
     //console.log(JSON.stringify(this.props.currentMovie[0]));
@@ -25,12 +24,10 @@ class Details extends Component {
     //JSON.stringify(this.props.currentMovie[0])
 
     return (
-      // < br/>
       <>
         {/* (condition) ? [return for true] : [return for false]; */}
         {(this.props.movies === [] || this.props.currentMovie === [] || this.props.detail === []) ?
           <>
-          <p>HEY IS THIS WORKING?</p>
             {this.props.history.push('/')}
           </>
           : 
@@ -38,12 +35,12 @@ class Details extends Component {
           <br/>
             < img src={this.props.currentMovie[0].poster} alt={this.props.currentMovie[0].title} />
             <p>{this.props.currentMovie[0].title}</p>
-            <p>{this.props.detail[0].genres}</p>
+            {/* <p>{this.props.detail[0].genres}</p> */}
             <button onClick={() => this.props.history.push('/')}>Back</button>
             <button onClick={() => this.props.history.push('/Edit')}>Edit</button>
             <p>{this.props.currentMovie[0].description}</p>
             <p>Genres:</p>
-            {/* <p>{this.props.detail[0].genres.map((genre, i) => <span key={i}>{genre} </span>)}</p> */}
+            <p>{this.props.detail[0].genres.map((genre, i) => <span key={i}>{genre} </span>)}</p>
             {/* <p>{this.props.detail[0].genres.map((movie) => {
               return <p>{movie}</p>;
             })}
