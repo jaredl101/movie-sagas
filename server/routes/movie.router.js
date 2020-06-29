@@ -44,7 +44,7 @@ router.put('/:id', (req, res) => {
   let description = movie.newDescription;
   //console.log(`description is: ${description}`);
   //console.log(treat);
-  let queryTextForUpdate = `UPDATE "movies" SET "description"=$2, "title" =$3 WHERE id = $1`
+  let queryTextForUpdate = `UPDATE "movies" SET description=$2, title=$3 WHERE id = $1`
   pool.query(queryTextForUpdate, [id, description, title])
     .then((result) => {
       console.log(result.command);

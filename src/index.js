@@ -55,7 +55,7 @@ function* fetchCurrentMovie(action) {
 function* updateMovie(action) {
   //DELETE THE FRUIT
   try {
-    yield Axios.put(`/api/movie/${action.payload}`);
+    yield Axios.put(`/api/movie/${action.payload.currentId}`, action.payload);
     //yield put({ type: 'SET_MOVIE' });
   } catch (error) {
     alert('Unable to update movie on server', error);

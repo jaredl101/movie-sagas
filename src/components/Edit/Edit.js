@@ -9,14 +9,15 @@ class Edit extends Component {
     updatedMovie: {
       newTitle: '',
       newDescription: '',
+      currentId: this.props.currentId,
     }
   }
     
   
 handleChangeFor = (propertyName, event) => {
     this.setState({
-      responseToAdd: {
-        ...this.state.responseToAdd,
+      updatedMovie: {
+        ...this.state.updatedMovie,
         [propertyName]: event.target.value
       }
     })
@@ -55,7 +56,7 @@ handleChangeFor = (propertyName, event) => {
             onChange={(event) => this.handleChangeFor('newDescription', event)}
           />
           <br />
-          <button>Submit</button>
+          <button type="submit">Save</button>
           
         </form>
 
