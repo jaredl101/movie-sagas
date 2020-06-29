@@ -6,12 +6,13 @@ import Grid from "@material-ui/core/Grid";
 
 
 class MovieItem extends Component {
+  // The MovieItem component is a child of the MovieList
 
   toDetails = () => {
     this.props.dispatch({ type: 'SET_CURRENT_ID', payload: this.props.movieItem.id });
     this.props.dispatch({ type: 'FETCH_DETAIL', payload: this.props.movieItem.id });
     this.props.dispatch({ type: 'FETCH_CURRENT_MOVIE', payload: this.props.movieItem.id });
-    window.setTimeout(this.move, 250);
+    window.setTimeout(this.move, 250); // temp added as a work-around :(
   }
   move = () => {
     this.props.history.push('/Details') // temp 

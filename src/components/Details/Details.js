@@ -1,28 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
+import { Button } from '@material-ui/core';
 
 
 class Details extends Component {
-  componentDidMount = () => {
-    // this.props.dispatch({ type: 'SET_CURRENT_ID', payload: this.props.currentId });
-    // this.props.dispatch({ type: 'FETCH_DETAIL', payload: this.props.currentId });
-    // this.props.dispatch({ type: 'FETCH_CURRENT_MOVIE', payload: this.props.currentId });
-  }
-
-
+  // Details page that loads once a movie poster is clicked.
   render() {
 
-    //console.log(`Current movie genres: ${this.props.currentMovie}`)
-    //console.log(JSON.stringify(this.props.currentMovie[0]));
-    // if(this.props.detail.length > 0){
-    //   console.log(this.props.currentMovie[0].genres);
-
-    // }
-
-    //JSON.stringify(this.props.currentMovie[0])
     const { movies, currentMovie, detail, } = this.props;
-
     return (
       <>
 
@@ -37,8 +23,8 @@ class Details extends Component {
             < img src={currentMovie[0].poster} alt={currentMovie[0].title} />
             <p>{currentMovie[0].title}</p>
             {/* <p>{this.props.detail[0].genres}</p> */}
-            <button onClick={() => this.props.history.push('/')}>Back</button>
-            <button onClick={() => this.props.history.push('/Edit')}>Edit</button>
+            <Button variant="contained" color="secondary" size="small" onClick={() => this.props.history.push('/')}>Back</Button>
+            <Button variant="contained" color="primary" size="small" onClick={() => this.props.history.push('/Edit')}>Edit</Button>
             <p>{currentMovie[0].description}</p>
             <p>Genres:</p>
             <p>{detail[0].genres.map((genre, i) => <span key={i}>{genre} </span>)}</p>
@@ -63,23 +49,3 @@ const mapStateToProps = (state) => {
   };
 };
 export default withRouter(connect(mapStateToProps)(Details));
-
-
-
-
-
-// {
-//   (this.props.detail.length > 0 || this.props.currentMovie.length > 0) ? [
-//     < img src={this.props.currentMovie[0].poster} alt={this.props.currentMovie[0].title} />,
-//     <p>{this.props.currentMovie[0].title}</p>,
-//     <p>{this.props.detail.genres}</p>,
-//     <button onClick={() => this.props.history.push('/')}>Back</button>,
-//     <button onClick={() => this.props.history.push('/Edit')}>Edit</button>,
-//     <p>{this.props.currentMovie[0].description}</p>,
-//     <p>Genres:</p>,
-//     <p>{this.props.detail[0].genres.map((movie) => {
-//       return <p>{movie}</p>;
-//     })}
-//     </p>
-
-//   ]

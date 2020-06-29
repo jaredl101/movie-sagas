@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 
-// route to get specific movie
+// route to get details on specific movie with joined table
 router.get("/:id", (req, res) => {
   let id = req.params.id
   const queryText = `SELECT movies.title, array_agg(genres.name) AS genres

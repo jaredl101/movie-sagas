@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 
 class Header extends Component {
+  // Basic Header component with a Home button added for convenience.
   render() {
     return (
       <header className="App-header">
