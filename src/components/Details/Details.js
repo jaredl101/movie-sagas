@@ -27,21 +27,21 @@ class Details extends Component {
       <>
 
         {/* (condition) ? [return for true] : [return for false]; */}
-        {(movies === [] || this.props.currentMovie === [] || this.props.detail === []) ?
+        {(movies === [] || currentMovie === [] || detail === []) ?
           <>
             {this.props.history.push('/')}
           </>
           : 
           <>
           <br/>
-            < img src={this.props.currentMovie[0].poster} alt={this.props.currentMovie[0].title} />
-            <p>{this.props.currentMovie[0].title}</p>
+            < img src={currentMovie[0].poster} alt={currentMovie[0].title} />
+            <p>{currentMovie[0].title}</p>
             {/* <p>{this.props.detail[0].genres}</p> */}
             <button onClick={() => this.props.history.push('/')}>Back</button>
             <button onClick={() => this.props.history.push('/Edit')}>Edit</button>
-            <p>{this.props.currentMovie[0].description}</p>
+            <p>{currentMovie[0].description}</p>
             <p>Genres:</p>
-            <p>{this.props.detail[0].genres.map((genre, i) => <span key={i}>{genre} </span>)}</p>
+            <p>{detail[0].genres.map((genre, i) => <span key={i}>{genre} </span>)}</p>
             {/* <p>{this.props.detail[0].genres.map((movie) => {
               return <p>{movie}</p>;
             })}
